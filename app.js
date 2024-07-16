@@ -78,6 +78,8 @@ router.post('/', async (req, res)=> {
 
 })
 
+// list todo
+
 router.get('/', async (req, res)=> {
     const data = await Todo.findAndCountAll()
     res.status(200).send({
@@ -86,7 +88,20 @@ router.get('/', async (req, res)=> {
     })
 })
 
+// read todo
 
+router.get('/:id', async(req, res) => {
+    // const data = await Todo.findByPk(req.params.id) ----> alttaki nin kisasi
+    const data = await Todo.findOne({where:{id: req.params.id}})
+    res.status(200).send({
+        error: false,
+        result:data
+    })
+})
+
+//  update todo
+
+router.put('/')
 
 app.use(router)
 
