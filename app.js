@@ -101,7 +101,19 @@ router.get('/:id', async(req, res) => {
 
 //  update todo
 
-router.put('/')
+router.put('/:id', async (req, res)=> {
+    const data = await Todo.update(req.body, {where:{id:req.params.id}})
+    res.status(202).send({
+        error:false,
+        result:data,
+        message:(data[0]>=1 ? 'updated' : "couldnt update"),
+        new: await Todo.findByPk(req.params.id) 
+    })
+})
+
+// delete todo
+
+
 
 app.use(router)
 
